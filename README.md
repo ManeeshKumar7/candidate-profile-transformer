@@ -32,26 +32,16 @@ The application extracts candidate information, normalizes inconsistent values, 
 ```mermaid
 flowchart TD
 
-    subgraph Structured Source
-        A[Recruiter CSV]
-        B[CSV Reader]
-        C[CSV Extractor]
-        D[Candidate (CSV)]
-
-        A --> B
-        B --> C
-        C --> D
+    subgraph Structured_Source
+        A[Recruiter CSV] --> B[CSV Reader]
+        B --> C[CSV Extractor]
+        C --> D[Candidate CSV]
     end
 
-    subgraph Unstructured Source
-        E[Resume PDF]
-        F[Resume Reader]
-        G[Resume Extractor]
-        H[Candidate (Resume)]
-
-        E --> F
-        F --> G
-        G --> H
+    subgraph Unstructured_Source
+        E[Resume PDF] --> F[Resume Reader]
+        F --> G[Resume Extractor]
+        G --> H[Candidate Resume]
     end
 
     D --> I[Candidate Normalizer]
