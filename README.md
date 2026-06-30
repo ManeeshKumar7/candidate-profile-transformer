@@ -29,48 +29,39 @@ The application extracts candidate information, normalizes inconsistent values, 
 
 ## Project Architecture
 
-```
-Recruiter CSV
-        │
-        ▼
-   CSV Reader
-        │
-        ▼
- CSV Extractor
-        │
-        ▼
-   Candidate Model
-        │
-        │
-Resume PDF
-        │
-        ▼
- Resume Reader
-        │
-        ▼
-Resume Extractor
-        │
-        ▼
-   Candidate Model
-        │
-        ▼
- Candidate Normalizer
-        │
-        ▼
-   Profile Merger
-        │
-        ▼
-     Projector
-        │
-        ▼
-     Validator
-        │
-        ▼
- Final Candidate JSON
-```
+```mermaid
+flowchart TD
 
----
+    subgraph Structured Source
+        A[Recruiter CSV]
+        B[CSV Reader]
+        C[CSV Extractor]
+        D[Candidate (CSV)]
 
+        A --> B
+        B --> C
+        C --> D
+    end
+
+    subgraph Unstructured Source
+        E[Resume PDF]
+        F[Resume Reader]
+        G[Resume Extractor]
+        H[Candidate (Resume)]
+
+        E --> F
+        F --> G
+        G --> H
+    end
+
+    D --> I[Candidate Normalizer]
+    H --> I
+
+    I --> J[Profile Merger]
+    J --> K[Projector]
+    K --> L[Validator]
+    L --> M[Candidate Profile JSON]
+```
 ## Folder Structure
 
 ```
